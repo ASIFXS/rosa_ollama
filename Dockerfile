@@ -41,3 +41,18 @@ CMD ["/bin/bash", "-c", "source /opt/ros/noetic/setup.bash && \
     sleep 5 && \
     echo \"Run \\`start\\` to build and launch the ROSA-TurtleSim demo.\" && \
     /bin/bash"]
+# In your RUN apt-get install section add:
+RUN apt-get update && apt-get install -y \
+    libxcb-xinerama0 \
+    libxkbcommon-x11-0 \
+    libgl1-mesa-glx \
+    libxcb-icccm4 \
+    libxcb-image0 \
+    libxcb-keysyms1 \
+    libxcb-render-util0 \
+    libxcb-shape0 \
+    libxcb-xfixes0 \
+    libxcb-xkb1 \
+    libxkbcommon0 \
+    libxkbcommon-x11-0 \
+    --no-install-recommends

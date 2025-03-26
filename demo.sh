@@ -30,10 +30,11 @@ case "$(uname)" in
     Linux*|Darwin*)
         echo "Enabling X11 forwarding..."
         # If running under WSL, use :0 for DISPLAY
+        # Change this section in demo.sh
         if grep -q "WSL" /proc/version; then
             export DISPLAY=:0
         else
-            export DISPLAY=host.docker.internal:0
+            export DISPLAY=${DISPLAY:-:0}  # Use local display
         fi
         xhost +
         ;;
@@ -49,9 +50,9 @@ esac
 
 # Check if X11 forwarding is working
 if ! xset q &>/dev/null; then
-    echo "Error: X11 forwarding is not working. Please check your X11 server and try again."
-    exit 1
+    echo "Warning: X11 forwarding check failed, but we'll try to continue anyway."
 fi
+
 
 # Build and run the Docker container
 CONTAINER_NAME="rosa-turtlesim-demo"
